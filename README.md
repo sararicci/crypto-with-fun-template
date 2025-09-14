@@ -42,7 +42,7 @@ We suggest the following structure for your group folder:
 - README.md            # Your main project page with all 3 exercises.
 -  assets/              # (Optional) images or diagrams for your exercises.
 
-Here an example:  [group-XYZ](./group-XYZ/README.md)  
+Here the template:  [group-XYZ](./group-XYZ/README.md)  
 
 
 
