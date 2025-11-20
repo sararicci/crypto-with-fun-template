@@ -18,11 +18,11 @@ Each exercise is built with a different tool (Wayground Quiz, Miro, Other).
 ---
 
 ### 🔵 Exercise 2 – Miro Puzzle (Lungu Masauso)
-- **Tool**: Miro  
-- **Link**: [Solve the puzzle](https://miro.com/...)  
-- **Description**: Drag-and-drop game where students match generator algorithms (LCG, Mersenne Twister) to their properties.  
-- **Crypto concept explained**:  
-  This exercise illustrates the mechanics of specific generators, such as the Linear Congruential Generator (LCG) and the Blum Blum Shub algorithm. It highlights the critical difference between fast, predictable generators and those that are cryptographically strong based on hard mathematical problems like integer factorization.
+- **Tool**: Miro
+- **Link**: [Solve the puzzle](https://miro.com/...)
+- **Description**: An interactive quiz using sticky notes to test knowledge on PRNG mechanisms and mathematical calculations.
+- **Crypto concept explained**:
+  This exercise focuses on the internal mechanics of random number generators. It tests understanding of the **Linear Congruential Generator (LCG)** by asking for its recurrence relation and requiring a manual calculation of the next state ($X_1$) given specific parameters ($m, a, c, X_0$). It also explores the **Mersenne Twister**, specifically questioning why it is considered **cryptographically insecure** (due to predictability) and what operations it uses. Furthermore, the puzzle covers the **Blum Blum Shub** recurrence relation and fundamental concepts like the role of a **seed**, the **period** of a generator, and common **statistical tests** for randomness.
 
 ---
 
