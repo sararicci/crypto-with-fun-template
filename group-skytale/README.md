@@ -28,10 +28,10 @@ Each exercise is built with a different tool (Wayground Quiz, Miro, Other).
 
 ### 🟣 Exercise 3 – Kahoot (Arun Chittuparambil Polson)
 - **Tool**: Kahoot
-- **Link**: [Try it here](https://kahoot.com/...)  
-- **Description**: Multiple-choice puzzle focused on security testing and validation.  
-- **Crypto concept explained**:  
-  This section explores how we validate randomness using statistical methods like the Frequency and Serial tests. It further explains the strict requirements for a Cryptographically Secure PRNG (CSPRNG), specifically the "Next bit test" and "Forward security," which ensure an attacker cannot predict future or past sequence values.
+- **Link**: [Try it here](https://kahoot.com/...)
+- **Description**: A multiple-choice quiz covering the classification, properties, and applications of random number generators.
+- **Crypto concept explained**:
+This exercise assesses the understanding of **Random Number Generator (RNG)** classifications, specifically distinguishing between **True Random Number Generators (TRNG)**, which rely on physical randomness, and **Pseudo-Random Number Generators (PRNG)**, which use deterministic algorithms. It highlights essential properties of a good PRNG, such as **uniformity and independence**, and explores **Shannon's Entropy** as a measure of a sequence's unpredictability. Additionally, the quiz covers practical aspects, including **post-processing techniques** like XORing TRNG outputs and the critical role of random numbers in generating **secret cryptographic keys**.
 
 ---
 
