@@ -9,11 +9,11 @@ Each exercise is built with a different tool (Wayground Quiz, Miro, Other).
 ## 📘 Topic: Random Number Generation
 
 ### 🟢 Exercise 1 – Wayground Quiz (Joshua Nwokoye)
-- **Tool**: Wayground  
-- **Link**: [Play the quiz](https://kahoot.it/...)  
-- **Description**: A short 10-question quiz on the fundamentals of Randomness.  
-- **Crypto concept explained**:  
-  The core cryptographic concepts covered are the fundamental definitions of randomness and entropy. It distinguishes between True Random Number Generators (TRNG), which rely on physical noise sources, and Pseudo-Random Number Generators (PRNG), which use deterministic algorithms initialized by a seed.
+- **Tool**: Wayground
+- **Link**: [Play the quiz](https://wayground.com/print/quiz/6919a42202063608ba3be1b1)
+- **Description**: A comprehensive 13-question quiz focusing on Cryptographically Secure PRNGs and the Blum Blum Shub algorithm.
+- **Crypto concept explained**:
+  This exercise details the rigorous standards for a Cryptographically Secure PRNG (CSPRNG), emphasizing the importance of the next-bit test and forward security to prevent state prediction. It specifically examines the Blum Blum Shub algorithm, testing knowledge of its recurrence relation ($x_{n}=x_{n-1}^{2} \mod m$), the method for extracting random bits (using the least significant bit), and the formula for direct computation. Furthermore, it highlights the critical role of using TRNGs for generating unpredictable seeds and the use of statistical methods like the Frequency Test to detect potential weaknesses in the output.
 
 ---
 
