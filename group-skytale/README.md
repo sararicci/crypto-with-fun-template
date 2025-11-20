@@ -1,14 +1,14 @@
 # 🔐 Group SKYTALE – Crypto with Fun!
 
 Welcome to our project!  
-This page contains our 3 interactive exercises on **[chosen topic: Modular Arithmetic]**.  
+This page contains our 3 interactive exercises on **[chosen topic: Random Number Generator]**.  
 Each exercise is built with a different tool (Wayground Quiz, Miro, Other).
 
 ---
 
 ## 📘 Topic: Modular Arithmetic
 
-### 🟢 Exercise 1 – Wayground Quiz
+### 🟢 Exercise 1 – Wayground Quiz (Joshua Nwokoye)
 - **Tool**: Wayground  
 - **Link**: [Play the quiz](https://kahoot.it/...)  
 - **Description**: A short 10-question quiz on modular arithmetic.  
@@ -20,7 +20,7 @@ Each exercise is built with a different tool (Wayground Quiz, Miro, Other).
 
 ---
 
-### 🔵 Exercise 2 – Miro Puzzle
+### 🔵 Exercise 2 – Miro Puzzle (Lungu Masauso)
 - **Tool**: Miro  
 - **Link**: [Solve the puzzle](https://miro.com/...)  
 - **Description**: Drag-and-drop game where students match numbers to their modular inverses in **ℤ₁₄***.  
@@ -29,9 +29,9 @@ Each exercise is built with a different tool (Wayground Quiz, Miro, Other).
 
 ---
 
-### 🟣 Exercise 3 – Other Tool (e.g., Quizizz, H5P, LearningApps)
-- **Tool**: Quizizz  
-- **Link**: [Try it here](https://quizizz.com/...)  
+### 🟣 Exercise 3 – Kahhot (Arun Chittuparambil Polson)
+- **Tool**: Kahoot
+- **Link**: [Try it here](https://kahoot.com/...)  
 - **Description**: Multiple-choice puzzle with exponentiation mod n.  
 - **Crypto concept explained**:  
   Exponentiation in modular arithmetic is used in **Diffie–Hellman** key exchange and RSA.
