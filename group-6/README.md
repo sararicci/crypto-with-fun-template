@@ -7,7 +7,7 @@ This page contains our 2 interactive exercises on **[Symmetric Cryptography: Str
 
 ## 📘 Topic: Symmetric Cryptography
 
-### 🟢 Exercise 1 – Kahoot Quiz
+### 🟢 Exercise 1 – Kahoot Quiz **Hash Functions** (Roman Vaněk)
 - **Tool**: Kahoot 
 - **Link**: [Play the quiz](https://create.kahoot.it/share/hash-functions/1c633b8a-1f01-4f96-a5f8-4644893b619a)  
 - **Description**: A short 5-question interactive quiz testing your knowledge of hash functions in real-world scenarios. Challenge yourself on topics like file integrity verification, password storage, and cryptographic security.
@@ -29,24 +29,3 @@ They are fundamental to modern cryptography and have three key properties:
 📜 Digital Signatures: Create message digests for signing documents
 
 Common hash algorithms: MD5 (deprecated), SHA-1 (deprecated), SHA-256 (current standard), SHA-3, bcrypt, Argon2
-
-
----
-
-### 🔵 Exercise 2 – Miro Puzzle
-- **Tool**: Miro  
-- **Link**: [Solve the puzzle](https://miro.com/...)  
-- **Description**: Drag-and-drop game where students match numbers to their modular inverses in **ℤ₁₄***.  
-- **Crypto concept explained**:  
-  The concept of *inverses* is central to modular groups, ensuring decryption can reverse encryption.
-
----
-
-## 📝 Summary
-Through these 3 exercises, we explored:  
-- Modular arithmetic basics.  
-- Inverses in multiplicative groups.  
-- Exponentiation in cryptography.  
-
----
-
