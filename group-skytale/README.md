@@ -1,4 +1,4 @@
-# 🔐 Group SKYTALE – Crypto with Fun!
+# 🔐 Group 5 SKYTALE – Crypto with Fun!
 
 Welcome to our project!  
 This page contains our 3 interactive exercises on **[chosen topic: Random Number Generation]**.  
