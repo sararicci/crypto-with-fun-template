@@ -30,22 +30,3 @@ They are fundamental to modern cryptography and have three key properties:
 
 Common hash algorithms: MD5 (deprecated), SHA-1 (deprecated), SHA-256 (current standard), SHA-3, bcrypt, Argon2
 
-
----
-
-### 🔵 Exercise 2 – Miro Puzzle
-- **Tool**: Miro  
-- **Link**: [Solve the puzzle](https://miro.com/...)  
-- **Description**: Drag-and-drop game where students match numbers to their modular inverses in **ℤ₁₄***.  
-- **Crypto concept explained**:  
-  The concept of *inverses* is central to modular groups, ensuring decryption can reverse encryption.
-
----
-
-## 📝 Summary
-Through these 3 exercises, we explored:  
-- Modular arithmetic basics.  
-- Inverses in multiplicative groups.  
-- Exponentiation in cryptography.  
-
----
