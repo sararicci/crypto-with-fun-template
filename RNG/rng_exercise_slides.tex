@@ -1,0 +1,174 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\title{Random Number Generators}
+\subtitle{In-Class Exercise: Comparing Randomness}
+\author{Cryptography Course}
+\date{\today}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Exercise Overview}
+\begin{block}{Goal}
+Compare three different types of random number generators by generating and analyzing bit sequences.
+\end{block}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+    \item \textbf{Duration:} 10--15 minutes
+    \item \textbf{Task:} Generate three sequences of 100 bits
+    \item \textbf{Analysis:} Visual inspection and simple randomness tests
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Three Generators}
+\begin{enumerate}
+    \item \textbf{True Random Number Generator (TRNG)}
+    \begin{itemize}
+        \item Uses physical phenomena (atmospheric noise)
+        \item Source: \texttt{random.org}
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    
+    \item \textbf{Linear Congruential Generator (LCG)}
+    \begin{itemize}
+        \item Deterministic algorithm: $X_{n+1} = (aX_n + c) \mod m$
+        \item Fast but predictable
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    
+    \item \textbf{Cryptographically Secure PRNG (CSPRNG)}
+    \begin{itemize}
+        \item Designed for cryptographic applications
+        \item Unpredictable even with partial knowledge
+    \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Step 1: True RNG (random.org)}
+\begin{enumerate}
+    \item Visit: \texttt{https://www.random.org/integers/}
+    \item Configure the generator:
+    \begin{itemize}
+        \item Number of integers: \textbf{100}
+        \item Range: \textbf{0} to \textbf{1}
+        \item Format: \textbf{One per line}
+    \end{itemize}
+    \item Click \textbf{``Get Numbers''}
+    \item Copy the sequence and save it as \texttt{trng\_sequence.txt}
+\end{enumerate}
+
+\vspace{0.3cm}
+\begin{alertblock}{Note}
+This uses atmospheric noise for true randomness!
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Step 2: Linear Congruential Generator}
+\begin{block}{Simple Python Implementation}
+\begin{verbatim}
+a, c, m = 1103515245, 12345, 2**31
+seed = 42
+sequence = []
+for _ in range(100):
+    seed = (a * seed + c) % m
+    sequence.append(seed % 2)
+print(''.join(map(str, sequence)))
+\end{verbatim}
+\end{block}
+
+\vspace{0.2cm}
+Save the output as \texttt{lcg\_sequence.txt}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Step 3: Cryptographically Secure PRNG}
+\begin{block}{Python's \texttt{secrets} Module}
+\begin{verbatim}
+import secrets
+sequence = [secrets.randbelow(2) 
+            for _ in range(100)]
+print(''.join(map(str, sequence)))
+\end{verbatim}
+\end{block}
+
+\vspace{0.2cm}
+Save the output as \texttt{csprng\_sequence.txt}
+
+\vspace{0.3cm}
+\begin{alertblock}{Security Note}
+The \texttt{secrets} module is suitable for security-sensitive applications.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{Step 4: Visual Analysis}
+\begin{block}{Simple Tests to Perform}
+\begin{enumerate}
+    \item \textbf{Count 0s and 1s}
+    \begin{itemize}
+        \item Should be approximately 50/50
+    \end{itemize}
+    
+    \item \textbf{Look for patterns}
+    \begin{itemize}
+        \item Long runs of same bit?
+        \item Repetitive sequences?
+    \end{itemize}
+    
+    \item \textbf{Compare sequences}
+    \begin{itemize}
+        \item Which one ``looks'' more random?
+        \item Which one has unexpected patterns?
+    \end{itemize}
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Discussion Questions}
+\begin{itemize}
+    \item Can you visually distinguish between the three sequences?
+    \vspace{0.3cm}
+    
+    \item What makes a sequence ``look random''?
+    \vspace{0.3cm}
+    
+    \item Why might the LCG show patterns?
+    \vspace{0.3cm}
+    
+    \item When would you use each type of generator?
+    \vspace{0.3cm}
+    
+    \item What are the security implications of using weak RNGs in cryptography?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Key Takeaways}
+\begin{block}{Important Points}
+\begin{itemize}
+    \item \textbf{TRNGs} use physical randomness (unpredictable)
+    \item \textbf{LCGs} are fast but unsuitable for cryptography
+    \item \textbf{CSPRNGs} balance speed and security
+    \item Visual inspection is \textit{not sufficient} for security
+    \item Proper statistical tests are needed for cryptographic use
+\end{itemize}
+\end{block}
+
+\vspace{0.5cm}
+\centering
+\Large Questions?
+\end{frame}
+
+\end{document}

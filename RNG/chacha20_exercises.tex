@@ -1,0 +1,236 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2.5cm]{geometry}  % Standard A4 margins
+\usepackage{enumitem}
+\usepackage{tasks}
+\usepackage{exsheets}
+\usepackage{amssymb,amsfonts,latexsym,amsmath,epsfig,array,epsf,delarray,multicol} 
+\usepackage{amsthm}
+\usepackage{mathabx}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{wrapfig}
+\pgfplotsset{compat=1.8}
+\usetikzlibrary{arrows}
+
+% Spacing settings
+\renewcommand{\baselinestretch}{1.1}
+\renewcommand{\arraystretch}{1}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.3cm}
+
+% Custom commands
+\newcommand{\ds}{\displaystyle}
+\newcommand{\tc}{\makebox(0,0)[lc]{:}}
+\newcommand{\mkbx}[1]{\makebox(0,0)[lc]{#1}}
+
+% Theorem environments
+\newtheorem{alg}{Algorithm}
+
+% ExSheets setup
+\SetupExSheets{solution/print=true}
+
+\begin{document}
+
+\textbf{\Large Exercises and Solutions on ChaCha20 Stream Cipher}
+
+\vspace{0.5cm}
+
+\begin{question}
+
+ChaCha20 is a modern stream cipher that uses an "ARX" design: \textbf{A}ddition, \textbf{R}otation, and \textbf{X}OR. Unlike AES, it does not use S-boxes. We consider a "Toy" version using 4-bit words. 
+
+The fundamental building block is the \textbf{Quarter Round (QR)}. Given four 4-bit values $(a, b, c, d)$, the QR operations are:
+\begin{enumerate}
+    \item $a = (a + b) \pmod{16}$
+    \item $d = (d \oplus a) \lll 1$ (Rotate bits left by 1)
+    \item $c = (c + d) \pmod{16}$
+    \item $b = (b \oplus c) \lll 2$ (Rotate bits left by 2)
+\end{enumerate}
+
+\textbf{Initial State:}
+
+Let the 4-bit variables be initialized as:
+\[ a = 0011, \quad b = 1010, \quad c = 0101, \quad d = 1100 \]
+
+\begin{enumerate}[label=(\alph*)]
+\item Compute the state $(a, b, c, d)$ after one Quarter Round.
+\item Using the new value of $a$ as the first 4 bits of the keystream, encrypt the plaintext $P = 1111$ by computing $C = P \oplus a$.
+\end{enumerate}
+\end{question}
+
+\begin{solution}
+We follow the ARX steps sequentially. 
+
+\textbf{Step 1: Addition ($a = a+b$ mod 16):}
+\[ a = 0011 + 1010 = 3 + 10 = 13 \rightarrow \mathbf{1101} \]
+
+\textbf{Step 2: XOR and Rotate ($d = (d \oplus a) \lll 1$):}
+\[ d \oplus a = 1100 \oplus 1101 = 0001 \]
+Rotating $0001$ left by 1 bit gives $\mathbf{0010}$.
+
+\textbf{Step 3: Addition ($c = c+d$ mod 16):}
+\[ c = 0101 + 0010 = 5 + 2 = 7 \rightarrow \mathbf{0111} \]
+
+\textbf{Step 4: XOR and Rotate ($b = (b \oplus c) \lll 2$):}
+\[ b \oplus c = 1010 \oplus 0111 = 1101 \]
+Rotating $1101$ left by 2 bits ($1101 \rightarrow 1011 \rightarrow 0111$) gives $\mathbf{0111}$.
+
+\textbf{Resulting State:}
+\[ \boxed{a=1101, \; b=0111, \; c=0111, \; d=0010} \]
+
+\textbf{Encryption:}
+
+Using $a = 1101$ and $P = 1111$: 
+\[ C = P \oplus a = 1111 \oplus 1101 = \mathbf{0010} \]
+\end{solution}
+
+\begin{question}
+
+Consider the same Quarter Round operations as in Exercise 1. Now, let the initial state be:
+\[ a = 1111, \quad b = 0001, \quad c = 1000, \quad d = 0110 \]
+
+\begin{enumerate}[label=(\alph*)]
+\item Perform two consecutive Quarter Rounds on this state.
+\item If the final value of $d$ is used as keystream, decrypt the ciphertext $C = 1010$.
+\end{enumerate}
+\end{question}
+
+\begin{solution}
+
+\textbf{First Quarter Round:}
+
+\textbf{Step 1:} $a = 1111 + 0001 = 15 + 1 = 16 \equiv 0 \pmod{16} \rightarrow \mathbf{0000}$
+
+\textbf{Step 2:} $d \oplus a = 0110 \oplus 0000 = 0110$, rotate left by 1: $\mathbf{1100}$
+
+\textbf{Step 3:} $c = 1000 + 1100 = 8 + 12 = 20 \equiv 4 \pmod{16} \rightarrow \mathbf{0100}$
+
+\textbf{Step 4:} $b \oplus c = 0001 \oplus 0100 = 0101$, rotate left by 2: $0101 \rightarrow 1010 \rightarrow \mathbf{0101}$
+
+State after first round: $a=0000, b=0101, c=0100, d=1100$
+
+\textbf{Second Quarter Round:}
+
+\textbf{Step 1:} $a = 0000 + 0101 = 5 \rightarrow \mathbf{0101}$
+
+\textbf{Step 2:} $d \oplus a = 1100 \oplus 0101 = 1001$, rotate left by 1: $\mathbf{0011}$
+
+\textbf{Step 3:} $c = 0100 + 0011 = 4 + 3 = 7 \rightarrow \mathbf{0111}$
+
+\textbf{Step 4:} $b \oplus c = 0101 \oplus 0111 = 0010$, rotate left by 2: $0010 \rightarrow 0100 \rightarrow \mathbf{1000}$
+
+\textbf{Final state:} $\boxed{a=0101, \; b=1000, \; c=0111, \; d=0011}$
+
+\textbf{Decryption:} $P = C \oplus d = 1010 \oplus 0011 = \mathbf{1001}$
+\end{solution}
+
+\begin{question}
+
+In ChaCha20, the keystream must be unpredictable. Suppose an attacker knows that the initial state is $a = 0000, b = 0000, c = 0000, d = 0000$.
+
+\begin{enumerate}[label=(\alph*)]
+\item Compute the state after one Quarter Round.
+\item Explain why using all-zero initialization is cryptographically weak.
+\end{enumerate}
+\end{question}
+
+\begin{solution}
+
+\textbf{Quarter Round with all zeros:}
+
+\textbf{Step 1:} $a = 0000 + 0000 = 0 \rightarrow \mathbf{0000}$
+
+\textbf{Step 2:} $d \oplus a = 0000 \oplus 0000 = 0000$, rotate left by 1: $\mathbf{0000}$
+
+\textbf{Step 3:} $c = 0000 + 0000 = 0 \rightarrow \mathbf{0000}$
+
+\textbf{Step 4:} $b \oplus c = 0000 \oplus 0000 = 0000$, rotate left by 2: $\mathbf{0000}$
+
+\textbf{Result:} $\boxed{a=0000, \; b=0000, \; c=0000, \; d=0000}$
+
+\textbf{Cryptographic weakness:} The all-zero state is a fixed point under the Quarter Round operation. This means no matter how many rounds are applied, the state remains all zeros, producing a keystream of all zeros. This completely breaks the security of the cipher, as an attacker can trivially predict the keystream and decrypt any ciphertext by simply XORing with zeros (which leaves the plaintext unchanged). A secure stream cipher requires high-entropy initialization from a secret key and nonce to ensure unpredictable keystream generation.
+\end{solution}
+
+\begin{question}
+
+ChaCha20 uses multiple Quarter Rounds applied to different combinations of state variables. Consider a simplified "column round" that applies Quarter Rounds to two different 4-tuples from an 8-variable state.
+
+Initial state: $s_0 = 0010, s_1 = 0100, s_2 = 0110, s_3 = 1000, s_4 = 1010, s_5 = 1100, s_6 = 1110, s_7 = 0001$
+
+\begin{enumerate}[label=(\alph*)]
+\item Apply one Quarter Round to $(s_0, s_1, s_2, s_3)$.
+\item Apply one Quarter Round to $(s_4, s_5, s_6, s_7)$.
+\item Compare the final values of $s_0$ and $s_4$.
+\end{enumerate}
+\end{question}
+
+\begin{solution}
+
+\textbf{Quarter Round on $(s_0, s_1, s_2, s_3)$:}
+
+\textbf{Step 1:} $s_0 = 0010 + 0100 = 2 + 4 = 6 \rightarrow \mathbf{0110}$
+
+\textbf{Step 2:} $s_3 \oplus s_0 = 1000 \oplus 0110 = 1110$, rotate left by 1: $\mathbf{1101}$
+
+\textbf{Step 3:} $s_2 = 0110 + 1101 = 6 + 13 = 19 \equiv 3 \pmod{16} \rightarrow \mathbf{0011}$
+
+\textbf{Step 4:} $s_1 \oplus s_2 = 0100 \oplus 0011 = 0111$, rotate left by 2: $\mathbf{1101}$
+
+Result: $s_0=0110, s_1=1101, s_2=0011, s_3=1101$
+
+\textbf{Quarter Round on $(s_4, s_5, s_6, s_7)$:}
+
+\textbf{Step 1:} $s_4 = 1010 + 1100 = 10 + 12 = 22 \equiv 6 \pmod{16} \rightarrow \mathbf{0110}$
+
+\textbf{Step 2:} $s_7 \oplus s_4 = 0001 \oplus 0110 = 0111$, rotate left by 1: $\mathbf{1110}$
+
+\textbf{Step 3:} $s_6 = 1110 + 1110 = 14 + 14 = 28 \equiv 12 \pmod{16} \rightarrow \mathbf{1100}$
+
+\textbf{Step 4:} $s_5 \oplus s_6 = 1100 \oplus 1100 = 0000$, rotate left by 2: $\mathbf{0000}$
+
+Result: $s_4=0110, s_5=0000, s_6=1100, s_7=1110$
+
+\textbf{Comparison:} $\boxed{s_0 = 0110 = s_4}$ 
+
+Both values are equal after their respective Quarter Rounds, despite starting from different initial values. This demonstrates that the Quarter Round function can map different inputs to the same output value in certain positions, though the overall states remain different.
+\end{solution}
+
+\begin{question}
+
+In a stream cipher attack scenario, an attacker intercepts two ciphertexts that were encrypted using the same keystream (a critical security violation). The ciphertexts are $C_1 = 1011$ and $C_2 = 0110$.
+
+\begin{enumerate}[label=(\alph*)]
+\item If the attacker knows that the first plaintext is $P_1 = 0100$, recover the keystream.
+\item Using the recovered keystream, decrypt the second ciphertext $C_2$.
+\item Explain why keystream reuse is catastrophic for stream cipher security.
+\end{enumerate}
+\end{question}
+
+\begin{solution}
+
+\textbf{Recovering the keystream:}
+
+Since $C_1 = P_1 \oplus K$ where $K$ is the keystream, we have:
+\[ K = C_1 \oplus P_1 = 1011 \oplus 0100 = \mathbf{1111} \]
+
+\textbf{Decrypting $C_2$:}
+
+Using the recovered keystream:
+\[ P_2 = C_2 \oplus K = 0110 \oplus 1111 = \mathbf{1001} \]
+
+\textbf{Why keystream reuse is catastrophic:}
+
+Keystream reuse completely breaks stream cipher security because:
+
+\begin{enumerate}
+\item If an attacker knows one plaintext-ciphertext pair, they can immediately recover the keystream and decrypt all other messages encrypted with the same keystream.
+
+\item Even without knowing any plaintext, the attacker can compute $C_1 \oplus C_2 = (P_1 \oplus K) \oplus (P_2 \oplus K) = P_1 \oplus P_2$, which reveals the XOR of the two plaintexts. This eliminates the key entirely from the equation and can reveal patterns or allow known-plaintext attacks.
+
+\item This is why stream ciphers like ChaCha20 use a nonce (number used once) combined with the key to ensure each message is encrypted with a unique keystream, even when using the same secret key.
+\end{enumerate}
+\end{solution}
+
+\end{document}
